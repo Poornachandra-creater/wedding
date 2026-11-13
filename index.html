@@ -1,0 +1,445 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Beeresh & Anusha — Wedding Invitation</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #131211;
+      --espresso: #2b211c;
+      --sand: #e7d5be;
+      --champagne: #b99a6a;
+      --ember: #9f4b37;
+      --ivory: #f7f0e5;
+      --muted: #b6aa9d;
+      --page: #131211;
+      --surface: #221b17;
+      --line: rgba(231, 213, 190, 0.28);
+      color-scheme: dark;
+    }
+
+    * { box-sizing: border-box; }
+    html { background: #0d0c0b; scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      overflow-x: hidden;
+      background: var(--page);
+      color: var(--ivory);
+      font-family: "Manrope", Arial, sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+    h1, h2, h3, p { margin-top: 0; }
+    .story { max-width: 720px; margin: 0 auto; background: var(--page); overflow: hidden; }
+
+    /* Robust mobile photo chapter styling */
+    .photo-chapter {
+      --focus-x: 50%;
+      --focus-y: 50%;
+      --zoom-min: 1;
+      --zoom-max: 1.03;
+      --photo-scale: var(--zoom-min);
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      min-height: 75vh;
+      min-height: 75svh;
+      width: 100%;
+      overflow: hidden;
+      background: var(--espresso);
+    }
+    .photo-chapter--hero { min-height: 100vh; min-height: 100svh; }
+    .photo-chapter--detail { min-height: 65vh; min-height: 65svh; }
+
+    .photo-stage {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      z-index: 1;
+    }
+    .photo-stage img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: var(--focus-x) var(--focus-y);
+      transform: scale(var(--photo-scale));
+      transform-origin: var(--focus-x) var(--focus-y);
+      transition: transform 0.1s ease-out;
+      will-change: transform;
+      display: block;
+    }
+    .photo-overlay {
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      background: linear-gradient(180deg, rgba(19,18,17,.45) 0%, rgba(19,18,17,.08) 35%, rgba(19,18,17,.92) 100%);
+    }
+    .photo-chapter--hero .photo-overlay { background: linear-gradient(180deg, rgba(19,18,17,.35) 0%, rgba(19,18,17,.05) 40%, rgba(19,18,17,.94) 100%); }
+    .photo-chapter--bright .photo-overlay { background: linear-gradient(180deg, rgba(19,18,17,.25) 0%, rgba(19,18,17,.04) 38%, rgba(19,18,17,.9) 100%); }
+    .photo-chapter--dark .photo-overlay { background: linear-gradient(180deg, rgba(19,18,17,.6) 0%, rgba(19,18,17,.15) 42%, rgba(19,18,17,.96) 100%); }
+
+    .chapter-content {
+      position: relative;
+      z-index: 3;
+      width: 100%;
+      padding: 32px 24px calc(38px + env(safe-area-inset-bottom, 0px));
+    }
+    .top-mark {
+      position: absolute;
+      top: calc(20px + env(safe-area-inset-top, 0px));
+      left: 24px;
+      right: 24px;
+      z-index: 3;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      color: var(--sand);
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+    }
+    .top-mark::after { content: ""; flex: 0 0 32px; height: 1px; background: var(--champagne); }
+    .eyebrow { color: var(--champagne); font-size: 9px; font-weight: 700; letter-spacing: .18em; line-height: 1.4; text-transform: uppercase; margin-bottom: 12px; }
+
+    .hero-name {
+      max-width: 9ch;
+      color: var(--ivory);
+      font-family: "DM Serif Display", Georgia, serif;
+      font-size: clamp(3.2rem, 14vw, 5.6rem);
+      font-weight: 400;
+      letter-spacing: -.055em;
+      line-height: .87;
+      text-wrap: balance;
+      margin-bottom: 18px;
+    }
+    .amp { color: var(--champagne); font-size: .72em; font-style: italic; }
+    .hero-date { color: var(--sand); font-size: .76rem; font-weight: 600; letter-spacing: .1em; line-height: 1.65; text-transform: uppercase; margin: 0; }
+    .date-banner {
+      display: inline-block;
+      max-width: 100%;
+      margin: 0 0 16px;
+      padding: 9px 12px;
+      border: 1px solid var(--champagne);
+      background: rgba(19,18,17,.75);
+      color: #fff4de;
+      font-size: clamp(.6rem, 2.8vw, .8rem);
+      font-weight: 700;
+      letter-spacing: .04em;
+      line-height: 1.25;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+    .event-date-line {
+      color: #fff4de;
+      font-size: clamp(.6rem, 2.8vw, .78rem);
+      font-weight: 700;
+      letter-spacing: .035em;
+      line-height: 1.25;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+    .scroll-cue {
+      position: absolute;
+      bottom: calc(26px + env(safe-area-inset-bottom, 0px));
+      right: 24px;
+      z-index: 3;
+      color: var(--sand);
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      writing-mode: vertical-rl;
+    }
+    .scroll-cue::before { content: ""; display: block; width: 1px; height: 32px; margin-bottom: 8px; background: var(--champagne); }
+
+    .paper { padding: 62px 24px 54px; background: var(--ivory); color: var(--espresso); }
+    .paper .eyebrow { color: var(--ember); }
+    .paper-title { max-width: 11ch; font-family: "DM Serif Display", Georgia, serif; font-size: clamp(2.15rem, 9vw, 3.25rem); font-weight: 400; letter-spacing: -.04em; line-height: .98; margin-bottom: 22px; }
+    .paper-copy { max-width: 40ch; color: #57483d; font-size: .9rem; line-height: 1.75; margin-bottom: 34px; }
+    .family-list { border-top: 1px solid rgba(159,75,55,.35); }
+    .family-row { display: grid; grid-template-columns: 76px 1fr; gap: 14px; padding: 18px 0; border-bottom: 1px solid rgba(159,75,55,.2); }
+    .family-role { color: var(--ember); font-size: 9px; font-weight: 700; letter-spacing: .14em; line-height: 1.5; text-transform: uppercase; }
+    .family-name { color: var(--espresso); font-size: .91rem; font-weight: 700; line-height: 1.55; }
+    .family-name small { display: block; color: #77685c; font-size: .78rem; font-weight: 500; }
+
+    .chapter-title { max-width: 10ch; color: var(--ivory); font-family: "DM Serif Display", Georgia, serif; font-size: clamp(2.62rem, 12vw, 4.35rem); font-weight: 400; letter-spacing: -.045em; line-height: .94; text-wrap: balance; margin-bottom: 22px; }
+    .chapter-copy { max-width: 31ch; color: var(--sand); font-size: .86rem; line-height: 1.7; margin-bottom: 18px; }
+    .event-details { border-top: 1px solid var(--line); }
+    .event-line { display: flex; justify-content: space-between; align-items: baseline; gap: 18px; padding: 12px 0; border-bottom: 1px solid var(--line); }
+    .event-line span { color: var(--muted); font-size: 9px; font-weight: 700; letter-spacing: .13em; text-transform: uppercase; }
+    .event-line strong { color: var(--sand); font-size: .76rem; font-weight: 600; line-height: 1.5; text-align: right; }
+    .event-line--stack { display: block; }
+    .event-line--stack strong { display: block; margin-top: 4px; text-align: left; }
+
+    /* Schedule Section */
+    .schedule-section { padding: 60px 24px; background: var(--surface); color: var(--ivory); }
+    .schedule-section .eyebrow { color: var(--champagne); }
+    .schedule-title { font-family: "DM Serif Display", Georgia, serif; font-size: clamp(2rem, 8vw, 3rem); font-weight: 400; margin-bottom: 12px; }
+    .schedule-subtitle { color: var(--muted); font-size: .85rem; margin-bottom: 36px; line-height: 1.6; }
+    .schedule-date-group { margin-bottom: 32px; border-bottom: 1px solid var(--line); padding-bottom: 24px; }
+    .schedule-date-group:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+    .schedule-date-header { display: inline-block; padding: 4px 10px; background: rgba(185, 154, 106, 0.18); border: 1px solid var(--champagne); color: var(--sand); font-size: .75rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; margin-bottom: 16px; }
+    .schedule-item { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; padding: 10px 0; border-bottom: 1px dashed rgba(231, 213, 190, 0.12); }
+    .schedule-item:last-child { border-bottom: none; }
+    .schedule-event-name { color: var(--ivory); font-size: .9rem; font-weight: 600; text-transform: capitalize; }
+    .schedule-event-time { color: var(--champagne); font-size: .78rem; font-weight: 700; text-align: right; white-space: nowrap; }
+
+    .venue { padding: 58px 24px; background: #1a1512; }
+    .venue h2 { color: var(--ivory); font-family: "DM Serif Display", Georgia, serif; font-size: clamp(2.4rem, 10vw, 3.7rem); font-weight: 400; letter-spacing: -.045em; line-height: .95; margin-bottom: 24px; }
+    .venue-rule { width: 68px; height: 1px; background: var(--champagne); margin-bottom: 18px; }
+    .venue-address { color: var(--sand); font-size: .9rem; font-weight: 600; line-height: 1.85; margin-bottom: 25px; }
+    .venue-address span { display: block; color: var(--muted); font-size: .76rem; font-weight: 500; }
+    .venue-note { max-width: 36ch; color: var(--muted); font-size: .81rem; line-height: 1.7; margin: 0; }
+    .location-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 44px;
+      margin-top: 28px;
+      padding: 12px 16px;
+      border: 1px solid var(--champagne);
+      color: var(--sand);
+      font-size: .72rem;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-decoration: none;
+      text-transform: uppercase;
+      transition: background .2s ease, color .2s ease;
+    }
+    .location-link:hover, .location-link:focus-visible { background: var(--champagne); color: var(--ink); outline: none; }
+
+    .countdown-area { padding: 56px 24px 46px; background: var(--ivory); color: var(--espresso); }
+    .countdown-area .eyebrow { color: var(--ember); }
+    .countdown-title { max-width: 12ch; font-family: "DM Serif Display", Georgia, serif; font-size: clamp(2.12rem, 9vw, 3.18rem); font-weight: 400; letter-spacing: -.04em; line-height: .98; margin-bottom: 30px; }
+    .countdown { display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid rgba(159,75,55,.35); }
+    .count { padding: 15px 6px 0; border-right: 1px solid rgba(159,75,55,.25); text-align: center; }
+    .count:first-child { padding-left: 0; text-align: left; }
+    .count:last-child { border-right: 0; padding-right: 0; text-align: right; }
+    .count b { display: block; font-family: "DM Serif Display", Georgia, serif; font-size: clamp(1.8rem, 8vw, 2.72rem); font-weight: 400; line-height: 1; }
+    .count small { display: block; color: var(--ember); font-size: 8px; font-weight: 700; letter-spacing: .12em; margin-top: 8px; text-transform: uppercase; }
+
+    .closing-quote { max-width: 21ch; color: var(--ivory); font-family: "DM Serif Display", Georgia, serif; font-size: clamp(2rem, 8.8vw, 3.15rem); font-style: italic; font-weight: 400; letter-spacing: -.035em; line-height: 1.02; margin-bottom: 24px; }
+    .footer-rule { width: 48px; height: 1px; background: var(--champagne); margin-bottom: 16px; }
+    .footer-meta { color: var(--sand); font-size: .71rem; font-weight: 600; letter-spacing: .09em; line-height: 1.75; text-transform: uppercase; margin: 0; }
+
+    @media (min-width: 721px) {
+      body { padding: 24px; }
+      .story { box-shadow: 0 18px 60px rgba(0,0,0,.42); }
+      .chapter-content, .paper, .venue, .schedule-section, .countdown-area { padding-inline: 46px; }
+      .top-mark { left: 46px; right: 46px; }
+      .scroll-cue { right: 46px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .photo-stage img { transform: scale(1) !important; }
+    }
+  </style>
+</head>
+<body>
+  <main class="story">
+    <section class="photo-chapter photo-chapter--hero" data-photo style="--focus-x:54%;--focus-y:31%;--zoom-max:1.022;">
+      <div class="photo-stage">
+        <img src="img_0656.jpg" alt="Beeresh and Anusha in a formal portrait" fetchpriority="high">
+      </div>
+      <div class="photo-overlay"></div>
+      <div class="top-mark"><span>Wedding celebration</span><span>04 · 12 · 2026</span></div>
+      <div class="chapter-content">
+        <h1 class="hero-name">Beeresh <span class="amp">&amp;</span> Anusha</h1>
+        <p class="date-banner">Friday · 4 December 2026 · 9:30 AM – 10:20 AM</p>
+        <p class="hero-date">Mangala Bhavana · ShikariPura</p>
+      </div>
+      <span class="scroll-cue">Scroll</span>
+    </section>
+
+    <section class="paper">
+      <p class="eyebrow">Together with their families</p>
+      <h2 class="paper-title">Two lives, one beautiful beginning.</h2>
+      <p class="paper-copy">With joy in our hearts and the blessings of our elders, we invite you to celebrate the wedding of Beeresh and Anusha.</p>
+      <div class="family-list">
+        <div class="family-row"><span class="family-role">Groom</span><div class="family-name">Beeresh H.G.<small>Son of Ganesh Badagi &amp; Savita</small></div></div>
+        <div class="family-row"><span class="family-role">Bride</span><div class="family-name">Anusha A.M.<small>Daughter of Manjappa &amp; Mala</small></div></div>
+      </div>
+    </section>
+
+    <section class="photo-chapter photo-chapter--detail photo-chapter--dark" data-photo style="--focus-x:49%;--focus-y:40%;--zoom-max:1.022;">
+      <div class="photo-stage">
+        <img src="img_0660.jpg" alt="Beeresh and Anusha smiling together beneath sparklers" loading="lazy" decoding="async">
+      </div>
+      <div class="photo-overlay"></div>
+      <div class="top-mark"><span>Our story</span><span>With love</span></div>
+      <div class="chapter-content">
+        <p class="eyebrow">A promise in every light</p>
+        <p class="chapter-copy">A celebration of two people choosing the same beautiful future.</p>
+      </div>
+    </section>
+
+    <section class="photo-chapter photo-chapter--bright" data-photo style="--focus-x:50%;--focus-y:47%;--zoom-max:1.028;">
+      <div class="photo-stage">
+        <img src="img_0663.jpg" alt="Beeresh and Anusha walking together on a boardwalk" loading="lazy" decoding="async">
+      </div>
+      <div class="photo-overlay"></div>
+      <div class="top-mark"><span class="event-date-line">Thursday · 3 December 2026 · 7:30 PM</span></div>
+      <div class="chapter-content">
+        <p class="eyebrow">The main celebration</p>
+        <h2 class="chapter-title">Reception</h2>
+        <div class="event-details">
+          <div class="event-line"><span>Time</span><strong>7:30 PM onwards</strong></div>
+          <div class="event-line event-line--stack"><span>Place</span><strong>Mangala Bhavana</strong></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Complete Traditional Events Schedule -->
+    <section class="schedule-section">
+      <p class="eyebrow">Traditional Ceremonies</p>
+      <h2 class="schedule-title">Event Schedule</h2>
+      <p class="schedule-subtitle">Join us through the auspicious pre-wedding rituals and celebrations.</p>
+
+      <div class="schedule-date-group">
+        <div class="schedule-date-header">23 November 2026</div>
+        <div class="schedule-item"><span class="schedule-event-name">Chappara</span><span class="schedule-event-time">7:30 AM – 10:30 AM</span></div>
+        <div class="schedule-item"><span class="schedule-event-name">Akki Rashi Pooja</span><span class="schedule-event-time">12:00 PM – 1:00 PM</span></div>
+        <div class="schedule-item"><span class="schedule-event-name">Bale Shastra</span><span class="schedule-event-time">2:00 PM – 4:00 PM</span></div>
+      </div>
+
+      <div class="schedule-date-group">
+        <div class="schedule-date-header">24 November 2026</div>
+        <div class="schedule-item"><span class="schedule-event-name">Padalagi Pooja</span><span class="schedule-event-time">7:00 PM – 8:00 PM</span></div>
+      </div>
+
+      <div class="schedule-date-group">
+        <div class="schedule-date-header">26 November 2026</div>
+        <div class="schedule-item"><span class="schedule-event-name">Jakani</span><span class="schedule-event-time">6:00 PM – 10:00 PM</span></div>
+      </div>
+
+      <div class="schedule-date-group">
+        <div class="schedule-date-header">29 November 2026</div>
+        <div class="schedule-item"><span class="schedule-event-name">Haldi Event</span><span class="schedule-event-time">9:30 AM – 12:00 PM</span></div>
+        <div class="schedule-item"><span class="schedule-event-name">Sangeet Event</span><span class="schedule-event-time">6:00 PM – 10:00 PM</span></div>
+      </div>
+
+      <div class="schedule-date-group">
+        <div class="schedule-date-header">2 December 2026</div>
+        <div class="schedule-item"><span class="schedule-event-name">Mehendi</span><span class="schedule-event-time">6:00 PM onwards</span></div>
+      </div>
+
+      <div class="schedule-date-group">
+        <div class="schedule-date-header">3 December 2026</div>
+        <div class="schedule-item"><span class="schedule-event-name">Reception</span><span class="schedule-event-time">7:00 PM – 11:00 PM</span></div>
+      </div>
+
+      <div class="schedule-date-group">
+        <div class="schedule-date-header">4 December 2026</div>
+        <div class="schedule-item"><span class="schedule-event-name">Wedding Muhurtham</span><span class="schedule-event-time">9:00 AM – 10:20 AM</span></div>
+      </div>
+    </section>
+
+    <section class="photo-chapter photo-chapter--detail photo-chapter--dark" data-photo style="--focus-x:52%;--focus-y:61%;--zoom-max:1.05;">
+      <div class="photo-stage">
+        <img src="img_0659.jpg" alt="Beeresh and Anusha holding hands" loading="lazy" decoding="async">
+      </div>
+      <div class="photo-overlay"></div>
+      <div class="top-mark"><span>Hand in hand</span><span>Forever</span></div>
+      <div class="chapter-content">
+        <p class="eyebrow">One beautiful promise</p>
+        <p class="chapter-copy">Every journey becomes meaningful when it is shared.</p>
+      </div>
+    </section>
+
+    <section class="photo-chapter photo-chapter--bright" data-photo style="--focus-x:56%;--focus-y:58%;--zoom-max:1.026;">
+      <div class="photo-stage">
+        <img src="img_0658.jpg" alt="Beeresh and Anusha with a white horse" loading="lazy" decoding="async">
+      </div>
+      <div class="photo-overlay"></div>
+      <div class="top-mark"><span class="event-date-line">Friday · 4 December 2026 · 9:30 AM – 10:20 AM</span></div>
+      <div class="chapter-content">
+        <p class="eyebrow">The sacred moment</p>
+        <h2 class="chapter-title">Shubha Vivaha</h2>
+        <div class="event-details">
+          <div class="event-line"><span>Muhurta</span><strong>9:30 AM – 10:20 AM</strong></div>
+          <div class="event-line event-line--stack"><span>Place</span><strong>Mangala Bhavana</strong></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="venue">
+      <p class="eyebrow">The place to meet</p>
+      <h2>Mangala Bhavana</h2>
+      <div class="venue-rule"></div>
+      <p class="venue-address">ShiralKoppa Road<span>ShikariPura Town</span></p>
+      <p class="venue-note">Your presence will make our celebration complete. We look forward to sharing this special day with you.</p>
+      <a class="location-link" href="https://maps.app.goo.gl/bZEmi6EuYyM7gnVL8" target="_blank" rel="noopener noreferrer">Open venue location</a>
+    </section>
+
+    <section class="countdown-area" aria-label="Wedding countdown">
+      <p class="eyebrow">Until the wedding</p>
+      <h2 class="countdown-title">We cannot wait to celebrate with you.</h2>
+      <div class="countdown">
+        <div class="count"><b id="cd-days">--</b><small>Days</small></div>
+        <div class="count"><b id="cd-hours">--</b><small>Hours</small></div>
+        <div class="count"><b id="cd-mins">--</b><small>Mins</small></div>
+        <div class="count"><b id="cd-secs">--</b><small>Secs</small></div>
+      </div>
+    </section>
+
+    <section class="photo-chapter photo-chapter--dark" data-photo style="--focus-x:52%;--focus-y:52%;--zoom-max:1.026;">
+      <div class="photo-stage">
+        <img src="img_0661.jpg" alt="Beeresh and Anusha together beneath fireworks" loading="lazy" decoding="async">
+      </div>
+      <div class="photo-overlay"></div>
+      <div class="top-mark"><span>Beeresh &amp; Anusha</span><span>With love</span></div>
+      <div class="chapter-content">
+        <p class="closing-quote">Join us as we begin our forever.</p>
+        <div class="footer-rule"></div>
+        <p class="footer-meta">4 December 2026<br>Mangala Bhavana · ShikariPura</p>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const weddingDate = new Date('2026-12-04T09:30:00+05:30').getTime();
+    const output = { days: document.getElementById('cd-days'), hours: document.getElementById('cd-hours'), mins: document.getElementById('cd-mins'), secs: document.getElementById('cd-secs') };
+    function updateCountdown() {
+      const time = Math.max(0, weddingDate - Date.now());
+      output.days.textContent = Math.floor(time / 86400000);
+      output.hours.textContent = String(Math.floor((time % 86400000) / 3600000)).padStart(2, '0');
+      output.mins.textContent = String(Math.floor((time % 3600000) / 60000)).padStart(2, '0');
+      output.secs.textContent = String(Math.floor((time % 60000) / 1000)).padStart(2, '0');
+    }
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+
+    const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const chapters = [...document.querySelectorAll('[data-photo]')];
+    let frameQueued = false;
+    function zoomPhotos() {
+      frameQueued = false;
+      if (reduceMotion) return;
+      const center = innerHeight / 2;
+      chapters.forEach((chapter) => {
+        const rect = chapter.getBoundingClientRect();
+        const distance = Math.min(1, Math.abs(rect.top + rect.height / 2 - center) / (innerHeight * .9));
+        const styles = getComputedStyle(chapter);
+        const min = Number.parseFloat(styles.getPropertyValue('--zoom-min')) || 1;
+        const max = Number.parseFloat(styles.getPropertyValue('--zoom-max')) || 1.03;
+        chapter.style.setProperty('--photo-scale', (min + (max - min) * distance).toFixed(3));
+      });
+    }
+    function requestZoom() { if (!frameQueued) { frameQueued = true; requestAnimationFrame(zoomPhotos); } }
+    if (!reduceMotion) {
+      addEventListener('scroll', requestZoom, { passive: true });
+      addEventListener('resize', requestZoom);
+      requestZoom();
+    }
+  </script>
+</body>
+</html>
